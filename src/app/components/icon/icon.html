@@ -1,0 +1,5 @@
+@if (svgResource.hasValue()) {
+  <span [innerHTML]="safeSvg()"></span>
+} @else if (svgResource.status() === 'error') {
+  <span role="alert">Icon failed to load</span>
+}
