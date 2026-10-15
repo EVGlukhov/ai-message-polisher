@@ -1,0 +1,20 @@
+<div class="flex flex-wrap items-center justify-between gap-3 self-stretch">
+  <div class="flex flex-wrap items-center gap-2.5">
+    <app-select
+      label="Язык"
+      [options]="languageOptions"
+      [formField]="settingsForm.language"
+    />
+
+    <app-select
+      label="Тон"
+      [options]="toneOptions"
+      [formField]="settingsForm.tone"
+    />
+  </div>
+
+  <app-button variant="secondary" (pressed)="restoreDefaults()">
+    <span aria-hidden="true" class="text-base leading-none">+</span>
+    Новое сообщение
+  </app-button>
+</div>

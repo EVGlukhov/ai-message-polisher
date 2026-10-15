@@ -1,0 +1,21 @@
+<label
+      class="flex h-[38px] items-center gap-2 rounded-lg border border-zinc-200 bg-white px-3 text-xs"
+    >
+      <span class="shrink-0 text-zinc-500">{{label()}}</span>
+  <select
+    [attr.aria-label]="label()"
+    [value]="value()"
+    [disabled]="disabled()"
+    (change)="handleChange($event)"
+    (blur)="touch.emit()"
+    class="min-w-0 bg-transparent font-medium text-zinc-800 outline-none
+          focus-visible:ring-2 focus-visible:ring-violet-600
+          focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+  >
+    @for (option of options(); track option.value) {
+      <option [value]="option.value" [disabled]="option.disabled ?? false">
+        {{ option.label }}
+      </option>
+    }
+  </select>
+</label>

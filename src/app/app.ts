@@ -1,11 +1,12 @@
 import { Component, signal } from '@angular/core';
 import { Layout } from './components/layout/layout';
-import { Brand } from './components/brand/brand';
-import { Bar } from './components/bar/bar';
+import { Workspace } from './components/workspace/workspace';
+import { Introduction } from './components/introduction/introduction';
+import { Settings } from './components/settings/settings';
 
 @Component({
   selector: 'app-root',
-  imports: [Layout, Bar, Brand],
+  imports: [Layout, Workspace, Introduction, Settings],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
