@@ -1,12 +1,13 @@
 import { Component, signal } from '@angular/core';
-import { Layout } from './components/layout/layout';
-import { Workspace } from './components/workspace/workspace';
+import { PageLayout } from './components/page-layout/page-layout';
+import { PageWrapper } from './components/page-wrapper/page-wrapper';
 import { PageHeader } from './components/page-header/page-header';
-import { EditorToolbar } from './components/editor-toolbar/editor-toolbar';
+import { PageFooter } from './components/page-footer/page-footer';
+import { EditorModule } from './modules/editor/editor-module';
 
 @Component({
   selector: 'app-root',
-  imports: [Layout, Workspace, PageHeader, EditorToolbar],
+  imports: [PageLayout, PageWrapper, PageHeader, PageFooter, PageWrapper, EditorModule],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })

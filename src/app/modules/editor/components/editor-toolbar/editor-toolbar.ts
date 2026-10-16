@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { form, FormField } from '@angular/forms/signals';
-import { Select, SelectOption } from '../select/select';
-import { Button } from '../button/button';
+import { Select, SelectOption } from '../../../../components/select/select';
+import { Button } from '../../../../components/button/button';
 
 @Component({
   selector: 'app-editor-toolbar',
