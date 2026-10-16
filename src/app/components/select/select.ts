@@ -1,13 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  input,
-  InputSignal,
-  InputSignalWithTransform,
-  model,
-  ModelSignal,
-  output,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, model, output } from '@angular/core';
 import { FormValueControl } from '@angular/forms/signals';
 
 export type SelectOption = {
