@@ -5,7 +5,8 @@ type ButtonType = 'button' | 'submit' | 'reset';
 type ButtonVariant = 'primary' | 'secondary' | 'ghost';
 
 const variantClasses: Record<ButtonVariant, string> = {
-  primary: 'g-violet-600 text-white hover:bg-violet-700 focus-visible:outline-violet-600',
+  primary:
+    'bg-violet-600 text-white hover:bg-violet-700 disabled:bg-transparent disabled:text-zinc-600 disabled:hover:bg-zinc-100 disabled:hover:text-zinc-800 focus-visible:outline-violet-600',
   secondary:
     'border border-zinc-200 bg-white text-zinc-700 hover:bg-zinc-50 focus-visible:outline-violet-600',
   ghost: 'text-zinc-600 hover:bg-zinc-100 hover:text-zinc-800 focus-visible:outline-violet-600',

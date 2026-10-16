@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EditorPanels } from './editor-panels';
+import { EditorPanelHeading } from './editor-panel-heading';
 
-describe('EditorPanels', () => {
-  let component: EditorPanels;
-  let fixture: ComponentFixture<EditorPanels>;
+describe('EditorPanelHeading', () => {
+  let component: EditorPanelHeading;
+  let fixture: ComponentFixture<EditorPanelHeading>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [EditorPanels],
+      imports: [EditorPanelHeading],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(EditorPanels);
+    fixture = TestBed.createComponent(EditorPanelHeading);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

@@ -1,0 +1,43 @@
+<!-- <app-editor-panel>
+  <app-editor-panel-header>
+    <div
+      class="flex justify-start items-center flex-grow-0 flex-shrink-0 relative overflow-hidden gap-2"
+    >
+      <app-icon name="message"></app-icon>
+      <p class="flex-grow-0 flex-shrink-0 text-sm font-semibold text-left text-zinc-800">
+        Ваше сообщение
+      </p>
+    </div>
+    <p class="flex-grow-0 flex-shrink-0 text-xs text-left text-zinc-400">Очистить</p>
+  </app-editor-panel-header>
+  <div
+    class="flex flex-col justify-start items-start self-stretch flex-grow relative overflow-hidden p-6"
+  >
+    <p class="self-stretch flex-grow-0 flex-shrink-0 w-[564px] text-sm text-left text-zinc-500">
+      Введите или вставьте сообщение, которое хотите улучшить…
+    </p>
+  </div>
+</app-editor-panel> -->
+
+<app-editor-panel>
+  <app-editor-panel-header>
+    <app-editor-panel-heading iconName="message">
+      Ваше сообщение
+    </app-editor-panel-heading>
+    <app-button variant="ghost">Очистить</app-button>
+  </app-editor-panel-header>
+  <div
+    class="flex flex-col justify-start items-start self-stretch flex-grow relative overflow-hidden p-6"
+  >
+    <p class="self-stretch flex-grow-0 flex-shrink-0 w-[564px] text-sm text-left text-zinc-500">
+      Введите или вставьте сообщение, которое хотите улучшить…
+    </p>
+  </div>
+  <app-editor-footer>
+    <app-editor-info></app-editor-info>
+    <app-button variant="primary" [disabled]="true">
+      <app-icon name="sparkle"></app-icon>
+      Исправить текст
+    </app-button>
+  </app-editor-footer>
+</app-editor-panel>

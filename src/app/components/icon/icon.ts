@@ -10,9 +10,11 @@ import { DomSanitizer } from '@angular/platform-browser';
 
 const ICONS = {
   sparkle: '/assets/icons/sparkle.svg',
+  message: '/assets/icons/message.svg',
+  castle: '/assets/icons/castle.svg',
 } as const;
 
-type IconName = keyof typeof ICONS;
+export type IconName = keyof typeof ICONS;
 
 @Component({
   selector: 'app-icon',
