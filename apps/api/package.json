@@ -7,6 +7,19 @@
   "type": "commonjs",
   "main": "ai",
   "scripts": {
-    "dev": "nodemon server.ts"
+    "dev": "tsx watch server.ts --env-file=.env",
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/server.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^5.1.0",
+    "openai": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^26.6.5",
+    "tsx": "^4.23.15",
+    "typescript": "^5.9.3"
   }
 }

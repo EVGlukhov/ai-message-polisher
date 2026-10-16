@@ -29,6 +29,7 @@ yarn-error.log
 !.vscode/mcp.json
 .history/
 .lh/
+apps/api/.env
 
 # Miscellaneous
 /.angular/cache

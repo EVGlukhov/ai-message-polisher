@@ -2,7 +2,9 @@
   "name": "@ai-message-polisher",
   "private": true,
   "packageManager": "npm@11.9.0",
-  "workspaces": ["apps/*"],
+  "workspaces": [
+    "apps/*"
+  ],
   "scripts": {
     "start:web": "npm run start --workspace @ai-message-polisher/web",
     "build:web": "npm run build --workspace @ai-message-polisher/web",
