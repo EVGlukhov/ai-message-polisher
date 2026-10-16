@@ -3,9 +3,9 @@ import { Bar } from '../bar/bar';
 import { Brand } from '../brand/brand';
 
 @Component({
-  selector: 'app-page-layout',
+  selector: 'app-layout',
   imports: [Bar, Brand],
-  templateUrl: './page-layout.html',
-  styleUrl: './page-layout.css',
+  templateUrl: './layout.html',
+  styleUrl: './layout.css',
 })
-export class PageLayout {}
+export class Layout {}

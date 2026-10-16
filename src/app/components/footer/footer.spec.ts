@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PageWrapper } from './page-wrapper';
+import { Footer } from './footer';
 
-describe('PageWrapper', () => {
-  let component: PageWrapper;
-  let fixture: ComponentFixture<PageWrapper>;
+describe('Footer', () => {
+  let component: Footer;
+  let fixture: ComponentFixture<Footer>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PageWrapper],
+      imports: [Footer],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(PageWrapper);
+    fixture = TestBed.createComponent(Footer);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });
