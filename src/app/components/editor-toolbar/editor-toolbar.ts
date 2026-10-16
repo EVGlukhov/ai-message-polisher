@@ -4,13 +4,13 @@ import { Select, SelectOption } from '../select/select';
 import { Button } from '../button/button';
 
 @Component({
-  selector: 'app-settings',
+  selector: 'app-editor-toolbar',
   imports: [FormField, Select, Button],
-  templateUrl: './settings.html',
-  styleUrl: './settings.css',
+  templateUrl: './editor-toolbar.html',
+  styleUrl: './editor-toolbar.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Settings {
+export class EditorToolbar {
   readonly settingsModel = signal({
     language: 'ru',
     tone: 'preserve',
