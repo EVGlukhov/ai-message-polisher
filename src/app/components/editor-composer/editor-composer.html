@@ -26,13 +26,11 @@
     </app-editor-panel-heading>
     <app-button variant="ghost">Очистить</app-button>
   </app-editor-panel-header>
-  <div
-    class="flex flex-col justify-start items-start self-stretch flex-grow relative overflow-hidden p-6"
-  >
-    <p class="self-stretch flex-grow-0 flex-shrink-0 w-[564px] text-sm text-left text-zinc-500">
-      Введите или вставьте сообщение, которое хотите улучшить…
-    </p>
-  </div>
+  <app-textarea
+    label="Ваше сообщение"
+    placeholder="Введите или вставьте сообщение, которое хотите улучшить…"
+    [formField]="messageForm.text"
+  />
   <app-editor-footer>
     <app-editor-info></app-editor-info>
     <app-button variant="primary" [disabled]="true">

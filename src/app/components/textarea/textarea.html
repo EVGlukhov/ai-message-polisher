@@ -1,0 +1,10 @@
+<textarea
+  [attr.aria-label]="label()"
+  [value]="value()"
+  [placeholder]="placeholder()"
+  [disabled]="disabled()"
+  [readOnly]="readOnly()"
+  (input)="handleInput($event)"
+  (blur)="touch.emit()"
+  class="min-h-0 w-full flex-1 resize-none rounded-lg border border-transparent bg-transparent p-4 text-sm leading-6 text-zinc-800 outline-none placeholder:text-zinc-400 transition-colors duration-200 hover:border-zinc-200 hover:bg-zinc-50 focus:border-violet-300 focus:bg-white focus:ring-4 focus:ring-violet-100 disabled:cursor-not-allowed disabled:bg-zinc-50 disabled:opacity-70 read-only:bg-neutral-50"
+></textarea>
