@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 
 import { Icon } from '../icon/icon';
 import { Button } from '../button/button';
@@ -29,4 +29,17 @@ import { Textarea } from '../textarea/textarea';
 export class EditorComposer {
   readonly messageModel = signal({ text: '' });
   readonly messageForm = form(this.messageModel);
+
+  protected clear() {
+    this.messageModel.set({ text: '' });
+  }
+
+  readonly wordCount = computed(() => {
+    const text = this.messageModel().text.trim();
+    return text ? text.split(/\s+/u).length : 0;
+  });
+
+  readonly canRewrite = computed(() => {
+    return this.wordCount() > 0;
+  });
 }

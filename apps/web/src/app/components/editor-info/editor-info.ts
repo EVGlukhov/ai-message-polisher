@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 @Component({
   selector: 'app-editor-info',
@@ -6,4 +6,6 @@ import { Component } from '@angular/core';
   templateUrl: './editor-info.html',
   styleUrl: './editor-info.css',
 })
-export class EditorInfo {}
+export class EditorInfo {
+  readonly wordCount = input(0);
+}

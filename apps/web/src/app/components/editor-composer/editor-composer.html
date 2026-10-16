@@ -24,7 +24,9 @@
     <app-editor-panel-heading iconName="message">
       Ваше сообщение
     </app-editor-panel-heading>
-    <app-button variant="ghost">Очистить</app-button>
+    <app-button variant="ghost" [disabled]="!canRewrite()" (pressed)="clear()">
+      Очистить
+    </app-button>
   </app-editor-panel-header>
   <app-textarea
     label="Ваше сообщение"
@@ -32,8 +34,8 @@
     [formField]="messageForm.text"
   />
   <app-editor-footer>
-    <app-editor-info></app-editor-info>
-    <app-button variant="primary" [disabled]="true">
+    <app-editor-info [wordCount]="wordCount()"></app-editor-info>
+    <app-button variant="primary" [disabled]="!canRewrite()">
       <app-icon name="sparkle"></app-icon>
       Исправить текст
     </app-button>

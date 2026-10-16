@@ -1,0 +1,12 @@
+{
+  "name": "@ai-message-polisher/api",
+  "version": "1.0.0",
+  "description": "Backend AI integration",
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "ai",
+  "scripts": {
+    "dev": "nodemon server.ts"
+  }
+}
