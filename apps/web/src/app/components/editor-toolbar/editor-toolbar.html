@@ -1,12 +1,14 @@
 <div class="flex flex-wrap items-center justify-between gap-3 self-stretch">
   <div class="flex flex-wrap items-center gap-2.5">
     <app-select
+      id="language-select"
       label="Язык"
       [options]="languageOptions"
       [formField]="settingsForm.language"
     />
 
     <app-select
+      id="tone-select"
       label="Тон"
       [options]="toneOptions"
       [formField]="settingsForm.tone"

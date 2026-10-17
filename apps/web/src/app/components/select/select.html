@@ -1,21 +1,57 @@
-<label
-      class="flex h-[38px] items-center gap-2 rounded-lg border border-zinc-200 bg-white px-3 text-xs"
-    >
-      <span class="shrink-0 text-zinc-500">{{label()}}</span>
-  <select
+<div class="relative flex min-w-0 items-center gap-2">
+  <span class="hrink-0 text-xs text-zinc-500">{{ label() }}</span>
+
+  <button
+    type="button"
+    role="combobox"
+    class="inline-flex min-h-9.5 min-w-0 flex-1 items-center justify-between gap-3 rounded-lg border border-zinc-200 bg-white px-3 text-xs font-medium text-zinc-700 shadow-sm transition-colors hover:border-violet-300 hover:bg-zinc-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600 disabled:cursor-not-allowed disabled:opacity-50"
     [attr.aria-label]="label()"
-    [value]="value()"
+    [attr.aria-expanded]="isOpen()"
+    [attr.aria-controls]="id() + '-listbox'"
+    [attr.aria-activedescendant]="
+      isOpen() ? id() + '-option-' + activeIndex() : null
+    "
     [disabled]="disabled()"
-    (change)="handleChange($event)"
-    (blur)="touch.emit()"
-    class="min-w-0 bg-transparent font-medium text-zinc-800 outline-none
-          focus-visible:ring-2 focus-visible:ring-violet-600
-          focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+    (click)="toggle()"
+    (keydown)="handleKeydown($event)"
   >
-    @for (option of options(); track option.value) {
-      <option [value]="option.value" [disabled]="option.disabled ?? false">
-        {{ option.label }}
-      </option>
-    }
-  </select>
-</label>
+    <span class="truncate">{{ selectedOption()?.label ?? 'Выберите…' }}</span>
+    <app-icon
+      name="chevron-down"
+      aria-hidden="true"
+      class="shrink-0 text-zinc-400 transition-transform"
+      [class.rotate-180]="isOpen()">
+    </app-icon>
+  </button>
+
+  @if (isOpen()) {
+    <div
+      class="absolute right-0 top-full z-50 mt-2 max-h-60 w-full
+            min-w-48 overflow-y-auto rounded-xl border
+          border-zinc-200 bg-white p-1 shadow-lg shadow-zinc-900/10"
+      role="listbox"
+      [id]="id() + '-listbox'"
+      [attr.aria-label]="label()"
+    >
+      @for (option of options(); track option.value; let i = $index) {
+        <div
+          class="cursor-pointer rounded-lg px-3 py-2 text-sm text-zinc-700 transition-colors"
+          role="option"
+          [id]="id() + '-option-' + i"
+          [attr.aria-selected]="value() === option.value"
+          [attr.aria-disabled]="option.disabled ?? false"
+          [class.bg-zinc-100]="activeIndex() === i && !option.disabled"
+          [class.bg-violet-50]="value() === option.value"
+          [class.font-medium]="value() === option.value"
+          [class.text-violet-700]="value() === option.value"
+          [class.cursor-not-allowed]="option.disabled"
+          [class.opacity-50]="option.disabled"
+          (mouseenter)="setActive(i)"
+          (click)="selectOption(option)"
+        >
+          {{ option.label }}
+        </div>
+      }
+    </div>
+  }
+</div>

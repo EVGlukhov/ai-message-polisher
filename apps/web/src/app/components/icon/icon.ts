@@ -13,6 +13,7 @@ const ICONS = {
   message: '/assets/icons/message.svg',
   castle: '/assets/icons/castle.svg',
   copy: '/assets/icons/copy.svg',
+  'chevron-down': '/assets/icons/chevron-down.svg',
 } as const;
 
 export type IconName = keyof typeof ICONS;
