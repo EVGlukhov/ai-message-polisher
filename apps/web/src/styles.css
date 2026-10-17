@@ -1,3 +1,41 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import 'tailwindcss';
+
+@layer components {
+  .type-page-title {
+    @apply text-3xl leading-tight font-semibold text-zinc-800;
+  }
+
+  .type-brand {
+    @apply text-xl font-medium text-zinc-800;
+  }
+
+  .type-panel-title {
+    @apply text-sm font-semibold text-zinc-800;
+  }
+
+  .type-body {
+    @apply text-sm leading-6 text-zinc-800;
+  }
+
+  .type-body-muted {
+    @apply text-sm leading-6 text-zinc-600;
+  }
+
+  .type-empty-state-title {
+    @apply text-sm font-medium text-zinc-800;
+  }
+
+  .type-caption {
+    @apply text-xs leading-5 text-zinc-500;
+  }
+
+  .type-section-label {
+    @apply text-xs font-medium tracking-wide text-zinc-500 uppercase;
+  }
+
+  .type-highlight {
+    @apply text-violet-600;
+  }
+}

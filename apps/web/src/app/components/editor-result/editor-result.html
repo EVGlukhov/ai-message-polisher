@@ -7,12 +7,18 @@
       Ожидание текста
     </app-badge>
   </app-editor-panel-header>
+
+  <!-- <app-textarea
+    label="Ваше сообщение"
+    [formField]="resultForm.text"
+    [readOnly]="true"
+  /> -->
   <app-editor-panel-placeholder></app-editor-panel-placeholder>
   <app-editor-footer>
-    <p class="flex-grow-0 flex-shrink-0 text-xs text-left text-zinc-500">
+    <p class="grow-0 shrink-0 text-xs text-left text-zinc-500">
       Сначала добавьте сообщение
     </p>
-    <app-button variant="secondary">
+    <app-button variant="secondary" [disabled]="!canCopy()">
       <app-icon name="copy"></app-icon>
       Копировать текст
     </app-button>

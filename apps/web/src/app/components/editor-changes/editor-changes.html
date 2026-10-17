@@ -1,1 +1,45 @@
-<p>editor-changes works!</p>
+<div class="flex w-full min-w-0 flex-col gap-3.5">
+  <div
+    class="flex w-full min-w-0 flex-col items-start gap-1 sm:flex-row sm:items-center sm:justify-between sm:gap-4"
+  >
+    <p appTypography="panelTitle" class="min-w-0">
+      Несколько небольших правок
+    </p>
+    <p appTypography="caption" class="min-w-0">
+      Подсвеченные слова показывают, что изменилось
+    </p>
+  </div>
+
+  <div class="grid w-full min-w-0 grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
+    <app-editor-changes-panel>
+      <p appTypography="sectionLabel">СОГЛАСОВАНИЕ</p>
+      <p appTypography="body">
+        <span appTypography="bodyMuted"><i class="line-through">Мы хотел</i> → </span>
+        <span appTypography="highlight">Мы хотели</span>
+      </p>
+      <p appTypography="caption">
+        С местоимением «мы» нужна форма «хотели».
+      </p>
+    </app-editor-changes-panel>
+    <app-editor-changes-panel>
+      <p appTypography="sectionLabel">ОРФОГРАФИЯ И ПУНКТУАЦИЯ</p>
+      <p appTypography="body">
+        <span appTypography="bodyMuted"><i class="line-through">пожалуйсто</i> → </span>
+        <span appTypography="highlight">пожалуйста</span>
+      </p>
+      <p appTypography="caption">
+        «Пожалуйста» пишется через «а» и выделяется запятыми.
+      </p>
+    </app-editor-changes-panel>
+    <app-editor-changes-panel>
+      <p appTypography="sectionLabel">УПРАВЛЕНИЕ</p>
+      <p appTypography="body">
+        <span appTypography="bodyMuted"><i class="line-through">обсудить о шагах</i> → </span>
+        <span appTypography="highlight">обсудить шаги</span>
+      </p>
+      <p appTypography="caption">
+        После «обсудить» предлог «о» не нужен.
+      </p>
+    </app-editor-changes-panel>
+  </div>
+</div>
