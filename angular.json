@@ -57,6 +57,9 @@
         },
         "serve": {
           "builder": "@angular/build:dev-server",
+          "options": {
+            "proxyConfig": "apps/web/proxy.conf.json"
+          },
           "configurations": {
             "production": {
               "buildTarget": "ai-message-polisher:build:production"

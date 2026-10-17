@@ -1,4 +1,4 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 
 import { Icon } from '../icon/icon';
 import { Button } from '../button/button';
@@ -9,6 +9,7 @@ import { EditorPanelHeader } from '../editor-panel-header/editor-panel-header';
 import { EditorPanelHeading } from '../editor-panel-heading/editor-panel-heading';
 import { form, FormField } from '@angular/forms/signals';
 import { Textarea } from '../textarea/textarea';
+import { PolishStore } from '../../state/polish-store';
 
 @Component({
   selector: 'app-editor-composer',
@@ -27,6 +28,7 @@ import { Textarea } from '../textarea/textarea';
   styleUrl: './editor-composer.css',
 })
 export class EditorComposer {
+  readonly polishStore = inject(PolishStore);
   readonly messageModel = signal({ text: '' });
   readonly messageForm = form(this.messageModel);
 
@@ -34,12 +36,16 @@ export class EditorComposer {
     this.messageModel.set({ text: '' });
   }
 
+  protected polish() {
+    this.polishStore.polish(this.messageModel().text);
+  }
+
   readonly wordCount = computed(() => {
     const text = this.messageModel().text.trim();
     return text ? text.split(/\s+/u).length : 0;
   });
 
-  readonly canRewrite = computed(() => {
+  readonly canPolish = computed(() => {
     return this.wordCount() > 0;
   });
 }
