@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { TypographyDirective } from '../../directives/typography';
 
 @Component({
   selector: 'app-badge',
-  imports: [],
+  imports: [TypographyDirective],
   templateUrl: './badge.html',
   styleUrl: './badge.css',
 })

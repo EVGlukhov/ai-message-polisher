@@ -1,0 +1,19 @@
+<div
+  class="flex min-h-0 w-full flex-1 flex-col items-center justify-center gap-3 overflow-hidden p-6"
+  role="alert"
+>
+  <div
+    class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-red-100 text-red-600"
+    aria-hidden="true"
+  >
+    <app-icon name="message"></app-icon>
+  </div>
+
+  <p appTypography="emptyStateTitle" class="w-full text-center">
+    Не удалось обработать текст
+  </p>
+
+  <p appTypography="caption" class="w-full max-w-90 text-center">
+    {{ description() }}
+  </p>
+</div>

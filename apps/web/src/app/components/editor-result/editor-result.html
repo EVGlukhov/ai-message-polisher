@@ -9,8 +9,9 @@
       </app-badge>
     }
   </app-editor-panel-header>
-
-  @if (resultModel().text) {
+  @if (store.error(); as error) {
+    <app-editor-error [description]="error"></app-editor-error>
+  } @else if (resultModel().text) {
     <app-textarea
       label="Отредактированное сообщение"
       [formField]="resultForm.text"
@@ -21,19 +22,18 @@
   }
   <app-editor-footer>
     @if (!resultModel().text) {
-      <p class="grow-0 shrink-0 text-xs text-left text-zinc-500">
+      <p appTypography="caption" class="grow-0 shrink-0 text-left">
         Сначала добавьте сообщение
       </p>
-    } @else {
+    } @else if (store.changes().length > 0) {
       <div class="flex justify-start items-center grow-0 shrink-0 relative overflow-hidden gap-1.5">
         <app-icon name="success"></app-icon>
-        <p
-          class="grow-0 shrink-0 text-xs text-left text-zinc-600"
-          [textContent]="toneMessage()"
-        ></p>
+        <p appTypography="caption" class="grow-0 shrink-0 text-left">{{toneMessage()}}</p>
       </div>
+    } @else {
+      <p appTypography="caption">Текст не изменился.</p>
     }
-    <app-button variant="secondary" [disabled]="!canCopy()">
+    <app-button variant="primary" [disabled]="!canCopy()">
       <app-icon name="copy"></app-icon>
       Копировать текст
     </app-button>

@@ -1,9 +1,11 @@
 import { ChangeDetectionStrategy, Component, input, model, output } from '@angular/core';
 import { FormValueControl } from '@angular/forms/signals';
+import { TypographyDirective } from '../../directives/typography';
 
 @Component({
   selector: 'app-textarea',
   templateUrl: './textarea.html',
+  imports: [TypographyDirective],
   styleUrl: './textarea.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

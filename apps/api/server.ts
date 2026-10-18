@@ -84,7 +84,6 @@ app.post('/api/polish', async (req, res) => {
 
   try {
     const accessToken = await getGigaChatAccessToken();
-
     const gigachatResponse = await fetch(
       `https://gigachat.devices.sberbank.ru/api/v1/chat/completions`,
       {
@@ -129,17 +128,13 @@ app.post('/api/polish', async (req, res) => {
       !Array.isArray(result.choices) ||
       !result.choices[0]
     ) {
-      res
-        .status(502)
-        .json({ error: 'ИИ вернул некорректный ответ.' });
+      res.status(502).json({ error: 'ИИ вернул некорректный ответ.' });
       return;
     }
 
     const choice = result.choices[0];
     if (!isRecord(choice) || !isRecord(choice.message)) {
-      res
-        .status(502)
-        .json({ error: 'ИИ вернул некорректный ответ.' });
+      res.status(502).json({ error: 'ИИ вернул некорректный ответ.' });
       return;
     }
 
@@ -162,9 +157,7 @@ app.post('/api/polish', async (req, res) => {
     }
 
     if (!isPolishResponse(parsedResponse)) {
-      res
-        .status(502)
-        .json({ error: 'ИИ вернул некорректный ответ.' });
+      res.status(502).json({ error: 'ИИ вернул некорректный ответ.' });
       return;
     }
 

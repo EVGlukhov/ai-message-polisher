@@ -12,6 +12,7 @@ import {
 } from '@angular/core';
 import { FormValueControl } from '@angular/forms/signals';
 import { Icon } from '../icon/icon';
+import { TypographyDirective } from '../../directives/typography';
 
 export type SelectOption = {
   readonly value: string;
@@ -23,7 +24,7 @@ export type SelectOption = {
   selector: 'app-select',
   templateUrl: './select.html',
   styleUrl: './select.css',
-  imports: [Icon],
+  imports: [Icon, TypographyDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Select implements FormValueControl<string> {

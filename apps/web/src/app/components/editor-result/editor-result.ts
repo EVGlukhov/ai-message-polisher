@@ -11,6 +11,8 @@ import { EditorFooter } from '../editor-footer/editor-footer';
 import { Button } from '../button/button';
 import { Icon } from '../icon/icon';
 import { Textarea } from '../textarea/textarea';
+import { EditorError } from '../editor-error/editor-error';
+import { TypographyDirective } from '../../directives/typography';
 
 const toneMessages: Record<Tone, string> = {
   [Tone.Preserve]: 'Готово. Тон остался вашим.',
@@ -29,10 +31,12 @@ const toneMessages: Record<Tone, string> = {
     Badge,
     EditorPanelPlaceholder,
     EditorFooter,
+    EditorError,
     Button,
     Icon,
     Textarea,
     FormField,
+    TypographyDirective,
   ],
   templateUrl: './editor-result.html',
   styleUrl: './editor-result.css',

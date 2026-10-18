@@ -14,7 +14,7 @@
   />
   <app-editor-footer>
     <app-editor-info [wordCount]="wordCount()"></app-editor-info>
-    <app-button variant="secondary" [disabled]="!canPolish() " (pressed)="polish()">
+    <app-button variant="primary" [disabled]="!canPolish() " (pressed)="polish()">
       <app-icon name="sparkle"></app-icon>
       Исправить текст
     </app-button>
