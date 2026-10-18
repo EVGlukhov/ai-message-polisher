@@ -140,8 +140,6 @@ app.post('/api/polish', async (req, res) => {
 
     const content = choice.message.content;
 
-    console.log('content', content);
-
     if (typeof content !== 'string' || !content.trim()) {
       res.status(502).json({ error: 'ИИ не вернул текст.' });
       return;
