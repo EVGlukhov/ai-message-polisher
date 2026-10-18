@@ -12,7 +12,9 @@ describe('EditorPanelHeading', () => {
     }).compileComponents();
 
     fixture = TestBed.createComponent(EditorPanelHeading);
+    fixture.componentRef.setInput('iconName', 'sparkle');
     component = fixture.componentInstance;
+    fixture.detectChanges();
     await fixture.whenStable();
   });
 
