@@ -20,22 +20,24 @@
   } @else {
     <app-editor-panel-placeholder></app-editor-panel-placeholder>
   }
-  <app-editor-footer>
+  <app-editor-footer class="stack-on-small">
     @if (!resultModel().text) {
       <p appTypography="caption" class="grow-0 shrink-0 text-left">
         Сначала добавьте сообщение
       </p>
     } @else if (store.changes().length > 0) {
-      <div class="flex justify-start items-center grow-0 shrink-0 relative overflow-hidden gap-1.5">
-        <app-icon name="success"></app-icon>
-        <p appTypography="caption" class="grow-0 shrink-0 text-left">{{toneMessage()}}</p>
+      <div class="flex min-w-0 flex-1 items-center justify-start gap-1.5">
+        <app-icon class="shrink-0" name="success"></app-icon>
+        <p appTypography="caption" class="min-w-0 text-left">{{ toneMessage() }}</p>
       </div>
     } @else {
       <p appTypography="caption">Текст не изменился.</p>
     }
-    <app-button variant="primary" [disabled]="!canCopy()">
-      <app-icon name="copy"></app-icon>
-      Копировать текст
-    </app-button>
+    <div class="flex w-full justify-end pt-2 sm:w-auto sm:pt-0">
+      <app-button variant="primary" [disabled]="!canCopy()">
+        <app-icon name="copy"></app-icon>
+        Копировать текст
+      </app-button>
+    </div>
   </app-editor-footer>
 </app-editor-panel>

@@ -45,6 +45,8 @@ export class EditorToolbar {
   ];
 
   restoreDefaults(): void {
+    this.store.resetEditor();
+
     this.settingsModel.set({
       language: Language.Russian,
       tone: Tone.Preserve,

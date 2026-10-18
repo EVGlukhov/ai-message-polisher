@@ -43,6 +43,17 @@ export class EditorComposer {
   });
 
   constructor() {
+    let previousResetVersion = this.store.resetVersion();
+
+    effect(() => {
+      const resetVersion = this.store.resetVersion();
+
+      if (resetVersion !== previousResetVersion) {
+        previousResetVersion = resetVersion;
+        this.messageModel.set({ text: '' });
+      }
+    });
+
     effect(() => {
       const language = this.detectLanguage(this.messageModel().text);
 

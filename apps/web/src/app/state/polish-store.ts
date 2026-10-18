@@ -18,6 +18,7 @@ type PolishState = PolishSettings & {
   changes: PolishChange[];
   loading: boolean;
   error: string | null;
+  resetVersion: number;
 };
 
 export const PolishStore = signalStore(
@@ -30,9 +31,21 @@ export const PolishStore = signalStore(
     changes: [],
     loading: false,
     error: null as string | null,
+    resetVersion: 0,
   }),
 
   withMethods((store, api = inject(PolishApi)) => ({
+    resetEditor(): void {
+      patchState(store, {
+        language: Language.Russian,
+        tone: Tone.Preserve,
+        result: '',
+        changes: [],
+        error: null,
+        resetVersion: store.resetVersion() + 1,
+      });
+    },
+
     setLanguage(language: Language): void {
       patchState(store, { language });
     },
@@ -69,7 +82,7 @@ export const PolishStore = signalStore(
               const message =
                 error instanceof HttpErrorResponse && typeof error.error?.error === 'string'
                   ? error.error.error
-                : 'Не удалось обработать текст. Попробуйте ещё раз.';
+                  : 'Не удалось обработать текст. Попробуйте ещё раз.';
 
               patchState(store, { error: message });
               return EMPTY;
