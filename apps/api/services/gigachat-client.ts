@@ -70,6 +70,7 @@ export async function polishWithGigaChat(
   text: string,
   language: LanguageValue,
   tone: ToneValue,
+  completionTimeoutMs = 120_000,
 ): Promise<PolishResponse> {
   const accessToken = await getAccessToken();
 
@@ -95,7 +96,7 @@ export async function polishWithGigaChat(
         { role: 'user', content: text },
       ],
     }),
-    signal: AbortSignal.timeout(120_000),
+    signal: AbortSignal.timeout(completionTimeoutMs),
   });
 
   if (!response.ok) {

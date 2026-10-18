@@ -10,9 +10,12 @@
     "build:contracts": "npm run build --workspace @ai-message-polisher/contracts",
     "start:web": "npm run start --workspace @ai-message-polisher/web",
     "build:web": "npm run build --workspace @ai-message-polisher/web",
-    "build:netlify": "npm run build:contracts && npm run build:web && node scripts/write-netlify-redirects.mjs",
+    "build:netlify": "npm run build:contracts && npm run build:web",
     "test:web": "npm run test --workspace @ai-message-polisher/web",
     "start:api": "npm run dev --workspace @ai-message-polisher/api",
     "build": "npm run build:web"
+  },
+  "dependencies": {
+    "undici": "^8.12.2"
   }
 }

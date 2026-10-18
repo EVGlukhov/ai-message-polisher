@@ -1,3 +1,14 @@
 [build]
   command = "npm run build:netlify"
   publish = "dist/ai-message-polisher/browser"
+
+[functions]
+  directory = "netlify/functions"
+  included_files = ["apps/api/certificates/Russian_Trusted_CA.pem"]
+  node_bundler = "esbuild"
+  external_node_modules = ["undici"]
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
