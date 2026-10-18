@@ -69,7 +69,7 @@ export const PolishStore = signalStore(
               const message =
                 error instanceof HttpErrorResponse && typeof error.error?.error === 'string'
                   ? error.error.error
-                  : 'Could not polish the text. Please try again.';
+                : 'Не удалось обработать текст. Попробуйте ещё раз.';
 
               patchState(store, { error: message });
               return EMPTY;

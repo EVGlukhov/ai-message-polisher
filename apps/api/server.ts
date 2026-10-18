@@ -66,19 +66,19 @@ app.post('/api/polish', async (req, res) => {
   const body: unknown = req.body;
 
   if (!isRecord(body)) {
-    res.status(400).json({ error: 'Request body must be an object.' });
+    res.status(400).json({ error: 'Некорректный запрос.' });
     return;
   }
 
   const { text, language, tone } = body;
 
   if (typeof text !== 'string' || !text.trim() || text.length > 20_000) {
-    res.status(400).json({ error: 'Provide text of up to 20,000 characters.' });
+    res.status(400).json({ error: 'Введите текст до 20 000 символов.' });
     return;
   }
 
   if (!isLanguage(language) || !isTone(tone)) {
-    res.status(400).json({ error: 'Unsupported language or tone.' });
+    res.status(400).json({ error: 'Неизвестный язык или тон.' });
     return;
   }
 
@@ -131,7 +131,7 @@ app.post('/api/polish', async (req, res) => {
     ) {
       res
         .status(502)
-        .json({ error: 'The AI service returned an invalid response.' });
+        .json({ error: 'ИИ вернул некорректный ответ.' });
       return;
     }
 
@@ -139,7 +139,7 @@ app.post('/api/polish', async (req, res) => {
     if (!isRecord(choice) || !isRecord(choice.message)) {
       res
         .status(502)
-        .json({ error: 'The AI service returned an invalid response.' });
+        .json({ error: 'ИИ вернул некорректный ответ.' });
       return;
     }
 
@@ -148,7 +148,7 @@ app.post('/api/polish', async (req, res) => {
     console.log('content', content);
 
     if (typeof content !== 'string' || !content.trim()) {
-      res.status(502).json({ error: 'The AI service returned no text.' });
+      res.status(502).json({ error: 'ИИ не вернул текст.' });
       return;
     }
 
@@ -157,14 +157,14 @@ app.post('/api/polish', async (req, res) => {
       parsedResponse = JSON.parse(content);
     } catch (error) {
       console.error('GigaChat returned invalid JSON:', error);
-      res.status(502).json({ error: 'The AI service returned invalid JSON.' });
+      res.status(502).json({ error: 'ИИ вернул некорректный ответ.' });
       return;
     }
 
     if (!isPolishResponse(parsedResponse)) {
       res
         .status(502)
-        .json({ error: 'The AI service returned an invalid response.' });
+        .json({ error: 'ИИ вернул некорректный ответ.' });
       return;
     }
 
@@ -177,7 +177,7 @@ app.post('/api/polish', async (req, res) => {
 
     if (!res.headersSent) {
       res.status(502).json({
-        error: 'Could not polish the text. Please try again.',
+        error: 'Не удалось обработать текст. Попробуйте ещё раз.',
       });
     }
   }
