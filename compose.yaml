@@ -1,0 +1,18 @@
+services:
+  api:
+    build: .
+    command: npm run start:api
+    env_file:
+      - ./apps/api/.env
+    environment:
+      PORT: 3000
+    ports:
+      - "3000:3000"
+
+  web:
+    build: .
+    command: npm run start --workspace @ai-message-polisher/web -- --host 0.0.0.0 --proxy-config apps/web/proxy.docker.conf.json
+    ports:
+      - "4200:4200"
+    depends_on:
+      - api
