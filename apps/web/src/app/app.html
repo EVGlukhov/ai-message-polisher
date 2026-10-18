@@ -6,10 +6,11 @@
       <app-editor-composer class="min-w-0 flex-1"></app-editor-composer>
       <app-editor-result class="min-w-0 flex-1"></app-editor-result>
     </div>
-    <app-editor-changes></app-editor-changes>
+    @if (polishStore.changes().length > 0) {
+      <app-editor-changes></app-editor-changes>
+    }
     <app-footer></app-footer>
   </div>
 </app-layout>
-
 
 

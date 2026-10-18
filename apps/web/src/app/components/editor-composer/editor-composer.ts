@@ -10,6 +10,7 @@ import { EditorPanelHeading } from '../editor-panel-heading/editor-panel-heading
 import { form, FormField } from '@angular/forms/signals';
 import { Textarea } from '../textarea/textarea';
 import { PolishStore } from '../../state/polish-store';
+import { Language } from '@ai-message-polisher/contracts';
 
 @Component({
   selector: 'app-editor-composer',
@@ -37,7 +38,11 @@ export class EditorComposer {
   }
 
   protected polish() {
-    this.polishStore.polish(this.messageModel().text);
+    this.polishStore.polish({
+      text: this.messageModel().text,
+      language: this.polishStore.language(),
+      tone: this.polishStore.tone(),
+    });
   }
 
   readonly wordCount = computed(() => {

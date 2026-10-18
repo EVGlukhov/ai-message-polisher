@@ -1,7 +1,9 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, inject, signal } from '@angular/core';
 import { form, FormField } from '@angular/forms/signals';
 import { Select, SelectOption } from '../select/select';
 import { Button } from '../button/button';
+import { PolishStore } from '../../state/polish-store';
+import { Language, Tone } from '@ai-message-polisher/contracts';
 
 @Component({
   selector: 'app-editor-toolbar',
@@ -11,26 +13,33 @@ import { Button } from '../button/button';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EditorToolbar {
+  readonly store = inject(PolishStore);
   readonly settingsModel = signal({
-    language: 'ru',
-    tone: 'preserve',
+    language: Language.Russian,
+    tone: Tone.Preserve,
   });
   readonly settingsForm = form(this.settingsModel);
+
+  constructor() {
+    effect(() => this.store.updateSettings(this.settingsModel()));
+  }
+
   readonly languageOptions: readonly SelectOption[] = [
-    { value: 'ru', label: 'Русский' },
-    { value: 'en', label: 'Английский' },
+    { value: Language.Russian, label: 'Русский' },
+    { value: Language.English, label: 'Английский' },
   ];
   readonly toneOptions: readonly SelectOption[] = [
-    { value: 'preserve', label: 'Сохранить мой тон' },
-    { value: 'neutral', label: 'Нейтральный' },
-    { value: 'friendly', label: 'Дружелюбный' },
-    { value: 'formal', label: 'Официальный' },
+    { value: Tone.Preserve, label: 'Сохранить мой тон' },
+    { value: Tone.Neutral, label: 'Нейтральный' },
+    { value: Tone.Friendly, label: 'Дружелюбный' },
+    { value: Tone.Formal, label: 'Официальный' },
+    { value: Tone.Vulgar, label: 'Разговорный, с ненормативной лексикой' },
   ];
 
   restoreDefaults(): void {
     this.settingsModel.set({
-      language: 'ru',
-      tone: 'preserve',
+      language: Language.Russian,
+      tone: Tone.Preserve,
     });
   }
 }

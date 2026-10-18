@@ -3,21 +3,36 @@
     <app-editor-panel-heading iconName="sparkle">
       Отредактированное сообщение
     </app-editor-panel-heading>
-    <app-badge>
-      Ожидание текста
-    </app-badge>
+    @if (polishStore.loading()) {
+      <app-badge>
+        Ожидание текста
+      </app-badge>
+    }
   </app-editor-panel-header>
 
-  <!-- <app-textarea
-    label="Ваше сообщение"
-    [formField]="resultForm.text"
-    [readOnly]="true"
-  /> -->
-  <app-editor-panel-placeholder></app-editor-panel-placeholder>
+  @if (resultModel().text) {
+    <app-textarea
+      label="Отредактированное сообщение"
+      [formField]="resultForm.text"
+      [readOnly]="true"
+    />
+  } @else {
+    <app-editor-panel-placeholder></app-editor-panel-placeholder>
+  }
   <app-editor-footer>
-    <p class="grow-0 shrink-0 text-xs text-left text-zinc-500">
-      Сначала добавьте сообщение
-    </p>
+    @if (!resultModel().text) {
+      <p class="grow-0 shrink-0 text-xs text-left text-zinc-500">
+        Сначала добавьте сообщение
+      </p>
+    } @else {
+      <div class="flex justify-start items-center grow-0 shrink-0 relative overflow-hidden gap-1.5">
+        <app-icon name="success"></app-icon>
+        <p
+          class="grow-0 shrink-0 text-xs text-left text-zinc-600"
+          [textContent]="toneMessage()"
+        ></p>
+      </div>
+    }
     <app-button variant="secondary" [disabled]="!canCopy()">
       <app-icon name="copy"></app-icon>
       Копировать текст

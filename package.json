@@ -3,9 +3,11 @@
   "private": true,
   "packageManager": "npm@11.9.0",
   "workspaces": [
-    "apps/*"
+    "apps/*",
+    "packages/*"
   ],
   "scripts": {
+    "build:contracts": "npm run build --workspace @ai-message-polisher/contracts",
     "start:web": "npm run start --workspace @ai-message-polisher/web",
     "build:web": "npm run build --workspace @ai-message-polisher/web",
     "start:api": "npm run dev --workspace @ai-message-polisher/api",

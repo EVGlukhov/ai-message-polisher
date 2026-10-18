@@ -4,25 +4,58 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, EMPTY, finalize, pipe, switchMap, tap } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 
-import { PolishApi } from '../services/polish-api';
+import { PolishApi } from '../api/polish-api';
+import {
+  Language,
+  PolishSettings,
+  Tone,
+  type PolishChange,
+  type PolishRequest,
+} from '@ai-message-polisher/contracts';
+
+type PolishState = PolishSettings & {
+  result: string;
+  changes: PolishChange[];
+  loading: boolean;
+  error: string | null;
+};
 
 export const PolishStore = signalStore(
   { providedIn: 'root' },
 
-  withState({
+  withState<PolishState>({
+    tone: Tone.Preserve,
+    language: Language.Russian,
     result: '',
+    changes: [],
     loading: false,
     error: null as string | null,
   }),
 
   withMethods((store, api = inject(PolishApi)) => ({
-    polish: rxMethod<string>(
+    updateSettings(settings: PolishSettings): void {
+      patchState(store, settings);
+    },
+
+    resetSettings(): void {
+      patchState(store, {
+        language: Language.Russian,
+        tone: Tone.Preserve,
+      });
+    },
+
+    polish: rxMethod<PolishRequest>(
       pipe(
-        switchMap((text: string) => {
+        switchMap((request: PolishRequest) => {
           patchState(store, { loading: true, error: null });
 
-          return api.polish(text).pipe(
-            tap(({ text: result }) => patchState(store, { result })),
+          return api.polish(request).pipe(
+            tap(({ text, changes }) =>
+              patchState(store, {
+                result: text,
+                changes,
+              }),
+            ),
             catchError((error: unknown) => {
               const message =
                 error instanceof HttpErrorResponse && typeof error.error?.error === 'string'

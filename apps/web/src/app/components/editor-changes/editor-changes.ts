@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { TypographyDirective } from '../../directives/typography';
 import { EditorChangesPanel } from '../editor-changes-panel/editor-changes-panel';
+import { PolishStore } from '../../state/polish-store';
 
 @Component({
   selector: 'app-editor-changes',
@@ -8,4 +9,6 @@ import { EditorChangesPanel } from '../editor-changes-panel/editor-changes-panel
   templateUrl: './editor-changes.html',
   styleUrl: './editor-changes.css',
 })
-export class EditorChanges {}
+export class EditorChanges {
+  readonly polishStore = inject(PolishStore);
+}

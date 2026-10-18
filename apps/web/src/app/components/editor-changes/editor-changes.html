@@ -11,35 +11,17 @@
   </div>
 
   <div class="grid w-full min-w-0 grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
-    <app-editor-changes-panel>
-      <p appTypography="sectionLabel">СОГЛАСОВАНИЕ</p>
-      <p appTypography="body">
-        <span appTypography="bodyMuted"><i class="line-through">Мы хотел</i> → </span>
-        <span appTypography="highlight">Мы хотели</span>
-      </p>
-      <p appTypography="caption">
-        С местоимением «мы» нужна форма «хотели».
-      </p>
-    </app-editor-changes-panel>
-    <app-editor-changes-panel>
-      <p appTypography="sectionLabel">ОРФОГРАФИЯ И ПУНКТУАЦИЯ</p>
-      <p appTypography="body">
-        <span appTypography="bodyMuted"><i class="line-through">пожалуйсто</i> → </span>
-        <span appTypography="highlight">пожалуйста</span>
-      </p>
-      <p appTypography="caption">
-        «Пожалуйста» пишется через «а» и выделяется запятыми.
-      </p>
-    </app-editor-changes-panel>
-    <app-editor-changes-panel>
-      <p appTypography="sectionLabel">УПРАВЛЕНИЕ</p>
-      <p appTypography="body">
-        <span appTypography="bodyMuted"><i class="line-through">обсудить о шагах</i> → </span>
-        <span appTypography="highlight">обсудить шаги</span>
-      </p>
-      <p appTypography="caption">
-        После «обсудить» предлог «о» не нужен.
-      </p>
-    </app-editor-changes-panel>
+    @for (change of polishStore.changes(); track $index) {
+      <app-editor-changes-panel>
+        <p appTypography="sectionLabel">{{ change.category }}</p>
+        <p appTypography="body">
+          <span appTypography="bodyMuted">
+            <i class="line-through">{{ change.original }}</i> →
+          </span>
+          <span appTypography="highlight">{{ change.replacement }}</span>
+        </p>
+        <p appTypography="caption">{{ change.explanation }}</p>
+      </app-editor-changes-panel>
+    }
   </div>
 </div>

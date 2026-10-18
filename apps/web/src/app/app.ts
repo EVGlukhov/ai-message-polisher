@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { Layout } from './components/layout/layout';
 import { Header } from './components/header/header';
 import { Footer } from './components/footer/footer';
@@ -6,6 +6,7 @@ import { EditorToolbar } from './components/editor-toolbar/editor-toolbar';
 import { EditorComposer } from './components/editor-composer/editor-composer';
 import { EditorResult } from './components/editor-result/editor-result';
 import { EditorChanges } from './components/editor-changes/editor-changes';
+import { PolishStore } from './state/polish-store';
 
 @Component({
   selector: 'app-root',
@@ -14,5 +15,6 @@ import { EditorChanges } from './components/editor-changes/editor-changes';
   styleUrl: './app.css',
 })
 export class App {
+  readonly polishStore = inject(PolishStore);
   protected readonly title = signal('ai-message-polisher');
 }
