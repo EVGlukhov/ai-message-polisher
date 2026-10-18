@@ -1,66 +1,66 @@
 <div align="center">
-  <img src="docs/images/message-polisher.png" alt="Screenshot of the Message Polisher web app" width="900">
+  <img src="docs/images/message-polisher.png" alt="Скриншот веб-приложения Message Polisher" width="900">
 
   <h1>Message Polisher</h1>
-  <p><strong>Make every message clear.</strong></p>
-  <p>Polish grammar, spelling, and tone while keeping the meaning of your message.</p>
+  <p><strong>Делайте каждое сообщение понятным.</strong></p>
+  <p>Улучшайте грамматику, орфографию и тон, сохраняя смысл сообщения.</p>
 
   <p>
     <img src="https://img.shields.io/badge/Angular-21-DD0031?logo=angular&logoColor=white" alt="Angular 21">
     <img src="https://img.shields.io/badge/Node.js-24-339933?logo=nodedotjs&logoColor=white" alt="Node.js 24">
-    <img src="https://img.shields.io/badge/Docker%20Compose-ready-2496ED?logo=docker&logoColor=white" alt="Docker Compose">
+    <img src="https://img.shields.io/badge/Docker%20Compose-ready-2496ED?logo=docker&logoColor=white" alt="Docker Compose готов">
     <img src="https://img.shields.io/badge/AI-GigaChat-6B4EFF" alt="GigaChat">
   </p>
 </div>
 
-## What it does
+## Возможности
 
-Message Polisher is a small web app for improving written messages. Choose a language and tone, paste a draft, and get an edited version with a breakdown of the changes.
+Message Polisher — небольшое веб-приложение для улучшения текстовых сообщений. Выберите язык и тон, вставьте черновик и получите отредактированный вариант с объяснением изменений.
 
-- **Languages:** Russian and English
-- **Tones:** preserve your tone, neutral, friendly, formal, or vulgar
-- **Change explanations:** review what changed and why
-- **Copy-ready result:** copy the polished message with one click
-- **Shared contracts:** TypeScript request and response types are shared between the web app and API
+- **Языки:** русский и английский
+- **Тон:** сохранить исходный, нейтральный, дружелюбный, формальный или грубый
+- **Объяснение изменений:** посмотрите, что и почему было исправлено
+- **Копирование результата:** скопируйте готовый текст одним нажатием
+- **Общие контракты:** типы запросов и ответов TypeScript используются и веб-приложением, и API
 
-## Run with Docker Compose
+## Запуск с Docker Compose
 
-### Requirements
+### Требования
 
-- Docker Desktop (or Docker Engine with the Compose plugin)
-- A GigaChat API authorization key
+- Docker Desktop или Docker Engine с плагином Compose
+- Ключ авторизации API GigaChat
 
-Create `apps/api/.env` and add your key:
+Создайте файл `apps/api/.env` и добавьте в него ключ:
 
 ```env
-GIGACHAT_AUTH_KEY=your-gigachat-authorization-key
+GIGACHAT_AUTH_KEY=ваш-ключ-авторизации-gigachat
 ```
 
-Then, from the repository root, build and start the web app and API:
+Затем из корневой папки репозитория соберите и запустите веб-приложение и API:
 
 ```bash
 docker compose up --build
 ```
 
-Open [http://localhost:4200](http://localhost:4200). The API is also available at [http://localhost:3000](http://localhost:3000).
+Откройте [http://localhost:4200](http://localhost:4200). API также доступен по адресу [http://localhost:3000](http://localhost:3000).
 
-Stop the services with:
+Чтобы остановить сервисы, выполните:
 
 ```bash
 docker compose down
 ```
 
-The API container trusts the Russian CA certificate shipped in `apps/api/certificates`. TLS certificate verification remains enabled. Keep `apps/api/.env` private; it is excluded from Git.
+Контейнер API использует сертификат российского центра сертификации из `apps/api/certificates`. Проверка TLS-сертификатов остаётся включённой. Не публикуйте файл `apps/api/.env`: он исключён из Git.
 
-## Local development
+## Локальная разработка
 
-Install dependencies from the repository root:
+Установите зависимости из корневой папки репозитория:
 
 ```bash
 npm ci
 ```
 
-Create `apps/api/.env` as shown above. In separate terminals, start the API and web app:
+Создайте `apps/api/.env`, как описано выше. В отдельных окнах терминала запустите API и веб-приложение:
 
 ```bash
 npm run start:api
@@ -70,9 +70,9 @@ npm run start:api
 npm run start:web
 ```
 
-The local Angular development proxy forwards `/api` requests to `http://localhost:3000`.
+Локальный прокси Angular перенаправляет запросы `/api` на `http://localhost:3000`.
 
-## Build and test
+## Сборка и тесты
 
 ```bash
 npm run build:web
@@ -80,22 +80,22 @@ npm run test:web
 npm run build --workspace @ai-message-polisher/api
 ```
 
-## Project structure
+## Структура проекта
 
 ```text
 apps/
-  api/        Express API and GigaChat integration
-  web/        Angular application
+  api/        API на Express и интеграция с GigaChat
+  web/        Приложение Angular
 packages/
-  contracts/  Shared TypeScript request and response types
+  contracts/  Общие типы запросов и ответов TypeScript
 ```
 
-The browser sends polish requests to `POST /api/polish`. The API validates the request, calls GigaChat, and returns the edited text and its changes.
+Браузер отправляет запросы на обработку текста методом `POST /api/polish`. API проверяет запрос, обращается к GigaChat и возвращает отредактированный текст со списком изменений.
 
-## Privacy
+## Конфиденциальность
 
-Text submitted for polishing is sent to this app's API and then to GigaChat to generate a result. Do not submit sensitive information unless you have reviewed and are comfortable with the applicable service policies.
+Отправленный на обработку текст передаётся API приложения, а затем GigaChat для подготовки результата. Не отправляйте конфиденциальную информацию, не ознакомившись с правилами использования соответствующих сервисов.
 
-## License
+## Лицензия
 
-See [LICENSE](./LICENSE).
+См. файл [LICENSE](./LICENSE).
