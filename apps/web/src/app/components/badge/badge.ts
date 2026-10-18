@@ -5,6 +5,5 @@ import { TypographyDirective } from '../../directives/typography';
   selector: 'app-badge',
   imports: [TypographyDirective],
   templateUrl: './badge.html',
-  styleUrl: './badge.css',
 })
 export class Badge {}

@@ -9,7 +9,6 @@ import { Language, Tone } from '@ai-message-polisher/contracts';
   selector: 'app-editor-toolbar',
   imports: [FormField, Select, Button],
   templateUrl: './editor-toolbar.html',
-  styleUrl: './editor-toolbar.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EditorToolbar {

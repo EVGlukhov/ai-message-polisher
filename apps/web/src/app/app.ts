@@ -12,7 +12,6 @@ import { PolishStore } from './state/polish-store';
   selector: 'app-root',
   imports: [Layout, Header, Footer, EditorToolbar, EditorComposer, EditorResult, EditorChanges],
   templateUrl: './app.html',
-  styleUrl: './app.css',
 })
 export class App {
   readonly store = inject(PolishStore);

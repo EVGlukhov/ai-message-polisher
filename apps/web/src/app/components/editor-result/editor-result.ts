@@ -39,7 +39,6 @@ const toneMessages: Record<Tone, string> = {
     TypographyDirective,
   ],
   templateUrl: './editor-result.html',
-  styleUrl: './editor-result.css',
 })
 export class EditorResult {
   readonly store = inject(PolishStore);

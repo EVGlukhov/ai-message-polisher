@@ -5,6 +5,5 @@ import { TypographyDirective } from '../../directives/typography';
   selector: 'app-header',
   imports: [TypographyDirective],
   templateUrl: './header.html',
-  styleUrl: './header.css',
 })
 export class Header {}

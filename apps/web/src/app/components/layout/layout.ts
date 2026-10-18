@@ -6,6 +6,5 @@ import { Brand } from '../brand/brand';
   selector: 'app-layout',
   imports: [Bar, Brand],
   templateUrl: './layout.html',
-  styleUrl: './layout.css',
 })
 export class Layout {}

@@ -26,7 +26,6 @@ import { Language } from '@ai-message-polisher/contracts';
     EditorPanelHeading,
   ],
   templateUrl: './editor-composer.html',
-  styleUrl: './editor-composer.css',
 })
 export class EditorComposer {
   readonly store = inject(PolishStore);

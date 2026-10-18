@@ -6,7 +6,6 @@ import { TypographyDirective } from '../../directives/typography';
   selector: 'app-editor-panel-heading',
   imports: [Icon, TypographyDirective],
   templateUrl: './editor-panel-heading.html',
-  styleUrl: './editor-panel-heading.css',
 })
 export class EditorPanelHeading {
   iconName = input.required<IconName>();

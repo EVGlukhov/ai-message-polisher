@@ -6,6 +6,5 @@ import { TypographyDirective } from '../../directives/typography';
   selector: 'app-brand',
   imports: [Icon, TypographyDirective],
   templateUrl: './brand.html',
-  styleUrl: './brand.css',
 })
 export class Brand {}
