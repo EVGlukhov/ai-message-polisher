@@ -15,13 +15,21 @@ import { Language, Tone } from '@ai-message-polisher/contracts';
 export class EditorToolbar {
   readonly store = inject(PolishStore);
   readonly settingsModel = signal({
-    language: Language.Russian,
-    tone: Tone.Preserve,
+    language: this.store.language(),
+    tone: this.store.tone(),
   });
   readonly settingsForm = form(this.settingsModel);
 
   constructor() {
     effect(() => this.store.updateSettings(this.settingsModel()));
+
+    effect(() => {
+      const language = this.store.language();
+
+      this.settingsModel.update((settings) =>
+        settings.language === language ? settings : { ...settings, language },
+      );
+    });
   }
 
   readonly languageOptions: readonly SelectOption[] = [

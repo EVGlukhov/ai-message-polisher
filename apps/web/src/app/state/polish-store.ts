@@ -33,6 +33,10 @@ export const PolishStore = signalStore(
   }),
 
   withMethods((store, api = inject(PolishApi)) => ({
+    setLanguage(language: Language): void {
+      patchState(store, { language });
+    },
+
     updateSettings(settings: PolishSettings): void {
       patchState(store, settings);
     },
@@ -47,7 +51,12 @@ export const PolishStore = signalStore(
     polish: rxMethod<PolishRequest>(
       pipe(
         switchMap((request: PolishRequest) => {
-          patchState(store, { loading: true, error: null });
+          patchState(store, {
+            loading: true,
+            error: null,
+            result: '',
+            changes: [],
+          });
 
           return api.polish(request).pipe(
             tap(({ text, changes }) =>

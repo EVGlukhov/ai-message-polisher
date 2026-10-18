@@ -10,5 +10,5 @@ import { PolishStore } from '../../state/polish-store';
   styleUrl: './editor-changes.css',
 })
 export class EditorChanges {
-  readonly polishStore = inject(PolishStore);
+  readonly store = inject(PolishStore);
 }

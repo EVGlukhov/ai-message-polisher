@@ -15,6 +15,6 @@ import { PolishStore } from './state/polish-store';
   styleUrl: './app.css',
 })
 export class App {
-  readonly polishStore = inject(PolishStore);
+  readonly store = inject(PolishStore);
   protected readonly title = signal('ai-message-polisher');
 }

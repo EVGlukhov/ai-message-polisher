@@ -11,7 +11,7 @@
   </div>
 
   <div class="grid w-full min-w-0 grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
-    @for (change of polishStore.changes(); track $index) {
+    @for (change of store.changes(); track $index) {
       <app-editor-changes-panel>
         <p appTypography="sectionLabel">{{ change.category }}</p>
         <p appTypography="body">

@@ -38,14 +38,14 @@ const toneMessages: Record<Tone, string> = {
   styleUrl: './editor-result.css',
 })
 export class EditorResult {
-  readonly polishStore = inject(PolishStore);
+  readonly store = inject(PolishStore);
   readonly resultModel = signal({ text: '' });
   readonly resultForm = form(this.resultModel);
-  readonly toneMessage = computed(() => toneMessages[this.polishStore.tone()]);
+  readonly toneMessage = computed(() => toneMessages[this.store.tone()]);
 
   constructor() {
     effect(() => {
-      this.resultModel.set({ text: this.polishStore.result() });
+      this.resultModel.set({ text: this.store.result() });
     });
   }
 
