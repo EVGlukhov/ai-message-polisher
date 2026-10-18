@@ -1,59 +1,101 @@
-# AiMessagePolisher
+<div align="center">
+  <img src="docs/images/message-polisher.png" alt="Screenshot of the Message Polisher web app" width="900">
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.26.
+  <h1>Message Polisher</h1>
+  <p><strong>Make every message clear.</strong></p>
+  <p>Polish grammar, spelling, and tone while keeping the meaning of your message.</p>
 
-## Development server
+  <p>
+    <img src="https://img.shields.io/badge/Angular-21-DD0031?logo=angular&logoColor=white" alt="Angular 21">
+    <img src="https://img.shields.io/badge/Node.js-24-339933?logo=nodedotjs&logoColor=white" alt="Node.js 24">
+    <img src="https://img.shields.io/badge/Docker%20Compose-ready-2496ED?logo=docker&logoColor=white" alt="Docker Compose">
+    <img src="https://img.shields.io/badge/AI-GigaChat-6B4EFF" alt="GigaChat">
+  </p>
+</div>
 
-To start a local development server, run:
+## What it does
 
-```bash
-ng serve
+Message Polisher is a small web app for improving written messages. Choose a language and tone, paste a draft, and get an edited version with a breakdown of the changes.
+
+- **Languages:** Russian and English
+- **Tones:** preserve your tone, neutral, friendly, formal, or vulgar
+- **Change explanations:** review what changed and why
+- **Copy-ready result:** copy the polished message with one click
+- **Shared contracts:** TypeScript request and response types are shared between the web app and API
+
+## Run with Docker Compose
+
+### Requirements
+
+- Docker Desktop (or Docker Engine with the Compose plugin)
+- A GigaChat API authorization key
+
+Create `apps/api/.env` and add your key:
+
+```env
+GIGACHAT_AUTH_KEY=your-gigachat-authorization-key
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Then, from the repository root, build and start the web app and API:
 
 ```bash
-ng generate component component-name
+docker compose up --build
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Open [http://localhost:4200](http://localhost:4200). The API is also available at [http://localhost:3000](http://localhost:3000).
+
+Stop the services with:
 
 ```bash
-ng generate --help
+docker compose down
 ```
 
-## Building
+The API container trusts the Russian CA certificate shipped in `apps/api/certificates`. TLS certificate verification remains enabled. Keep `apps/api/.env` private; it is excluded from Git.
 
-To build the project run:
+## Local development
+
+Install dependencies from the repository root:
 
 ```bash
-ng build
+npm ci
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+Create `apps/api/.env` as shown above. In separate terminals, start the API and web app:
 
 ```bash
-ng test
+npm run start:api
 ```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
 
 ```bash
-ng e2e
+npm run start:web
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+The local Angular development proxy forwards `/api` requests to `http://localhost:3000`.
 
-## Additional Resources
+## Build and test
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+```bash
+npm run build:web
+npm run test:web
+npm run build --workspace @ai-message-polisher/api
+```
+
+## Project structure
+
+```text
+apps/
+  api/        Express API and GigaChat integration
+  web/        Angular application
+packages/
+  contracts/  Shared TypeScript request and response types
+```
+
+The browser sends polish requests to `POST /api/polish`. The API validates the request, calls GigaChat, and returns the edited text and its changes.
+
+## Privacy
+
+Text submitted for polishing is sent to this app's API and then to GigaChat to generate a result. Do not submit sensitive information unless you have reviewed and are comfortable with the applicable service policies.
+
+## License
+
+See [LICENSE](./LICENSE).
