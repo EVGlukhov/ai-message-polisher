@@ -118,6 +118,8 @@ export async function polishWithGigaChat(
 
   const content = result.choices[0].message.content;
 
+  console.log('content', content);
+
   if (typeof content !== 'string' || !content.trim()) {
     throw new Error('GigaChat returned no text');
   }

@@ -1,6 +1,6 @@
 import { signal, type WritableSignal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Tone } from '@ai-message-polisher/contracts';
+import { Tone, type PolishChange } from '@ai-message-polisher/contracts';
 import { PolishStore } from '../../state/polish-store';
 import { EditorResult } from './editor-result';
 
@@ -10,6 +10,8 @@ describe('EditorResult', () => {
     result: WritableSignal<string>;
     tone: WritableSignal<Tone>;
     loading: WritableSignal<boolean>;
+    error: WritableSignal<string | null>;
+    changes: WritableSignal<PolishChange[]>;
   };
 
   beforeEach(async () => {
@@ -17,6 +19,8 @@ describe('EditorResult', () => {
       result: signal(''),
       tone: signal(Tone.Preserve),
       loading: signal(false),
+      error: signal<string | null>(null),
+      changes: signal<PolishChange[]>([]),
     };
 
     await TestBed.configureTestingModule({
@@ -50,6 +54,14 @@ describe('EditorResult', () => {
   it('shows the message for the selected tone', async () => {
     store.result.set('Текст готов');
     store.tone.set(Tone.Friendly);
+    store.changes.set([
+      {
+        category: 'Стиль',
+        original: 'Текст не готов',
+        replacement: 'Текст готов',
+        explanation: 'Уточнена формулировка.',
+      },
+    ]);
     fixture.detectChanges();
     await fixture.whenStable();
     fixture.detectChanges();
