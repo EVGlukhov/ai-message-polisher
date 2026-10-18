@@ -45,14 +45,36 @@ export class EditorResult {
   readonly resultModel = signal({ text: '' });
   readonly resultForm = form(this.resultModel);
   readonly toneMessage = computed(() => toneMessages[this.store.tone()]);
+  readonly copyStatus = signal<'success' | 'error' | null>(null);
 
   constructor() {
     effect(() => {
       this.resultModel.set({ text: this.store.result() });
+    });
+    effect(() => {
+      if (this.store.loading()) {
+        this.copyStatus.set(null);
+      }
     });
   }
 
   protected canCopy = computed(() => {
     return this.resultModel().text.trim().length > 0;
   });
+
+  protected async copyResult(): Promise<void> {
+    this.copyStatus.set(null);
+
+    try {
+      if (!navigator.clipboard?.writeText) {
+        throw new Error('Clipboard API is unavailable');
+      }
+
+      await navigator.clipboard.writeText(this.resultModel().text);
+      this.copyStatus.set('success');
+    } catch (error: unknown) {
+      console.error('Failed to copy polished text:', error);
+      this.copyStatus.set('error');
+    }
+  }
 }

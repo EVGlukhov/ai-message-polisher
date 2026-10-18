@@ -27,16 +27,31 @@
       </p>
     } @else if (store.changes().length > 0) {
       <div class="flex min-w-0 flex-1 items-center justify-start gap-1.5">
-        <app-icon class="shrink-0" name="success"></app-icon>
+        <app-icon class="shrink-0 text-violet-600" name="success"></app-icon>
         <p appTypography="caption" class="min-w-0 text-left">{{ toneMessage() }}</p>
       </div>
     } @else {
       <p appTypography="caption">Текст не изменился.</p>
     }
     <div class="flex w-full justify-end pt-2 sm:w-auto sm:pt-0">
-      <app-button variant="primary" [disabled]="!canCopy()">
-        <app-icon name="copy"></app-icon>
-        Копировать текст
+      <app-button variant="primary" [disabled]="!canCopy()" (pressed)="copyResult()">
+        <app-icon
+          [class.text-white]="canCopy()"
+          [name]="copyStatus() === 'success' ? 'success' : 'copy'"
+        ></app-icon>
+        <span
+          appTypography="caption"
+          [class.text-white]="canCopy()"
+          aria-live="polite"
+        >
+        {{
+          copyStatus() === 'success'
+            ? 'Скопировано'
+            : copyStatus() === 'error'
+              ? 'Не удалось — повторить'
+              : 'Копировать текст'
+        }}
+        </span>
       </app-button>
     </div>
   </app-editor-footer>

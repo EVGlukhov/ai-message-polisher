@@ -10,7 +10,7 @@ import { EditorPanelHeading } from '../editor-panel-heading/editor-panel-heading
 import { form, FormField } from '@angular/forms/signals';
 import { Textarea } from '../textarea/textarea';
 import { PolishStore } from '../../state/polish-store';
-import { Language } from '@ai-message-polisher/contracts';
+import { Language, type PolishRequest } from '@ai-message-polisher/contracts';
 
 @Component({
   selector: 'app-editor-composer',
@@ -31,6 +31,7 @@ export class EditorComposer {
   readonly store = inject(PolishStore);
   readonly messageModel = signal({ text: '' });
   readonly messageForm = form(this.messageModel);
+  readonly lastSubmittedRequest = signal<PolishRequest | null>(null);
 
   readonly wordCount = computed(() => {
     const text = this.messageModel().text.trim();
@@ -38,6 +39,19 @@ export class EditorComposer {
   });
 
   readonly canPolish = computed(() => {
+    const text = this.messageModel().text;
+    const lastRequest = this.lastSubmittedRequest();
+    const hasRequestChanges =
+      lastRequest === null ||
+      text !== lastRequest.text ||
+      this.store.language() !== lastRequest.language ||
+      this.store.tone() !== lastRequest.tone;
+    const canRetry = this.store.error() !== null;
+
+    return text.trim().length > 0 && (hasRequestChanges || canRetry) && !this.store.loading();
+  });
+
+  readonly canClear = computed(() => {
     return this.wordCount() > 0 && !this.store.loading();
   });
 
@@ -50,6 +64,7 @@ export class EditorComposer {
       if (resetVersion !== previousResetVersion) {
         previousResetVersion = resetVersion;
         this.messageModel.set({ text: '' });
+        this.lastSubmittedRequest.set(null);
       }
     });
 
@@ -64,14 +79,19 @@ export class EditorComposer {
 
   protected clear() {
     this.messageModel.set({ text: '' });
+    this.lastSubmittedRequest.set(null);
   }
 
   protected polish() {
-    this.store.polish({
-      text: this.messageModel().text,
+    const text = this.messageModel().text;
+    const request: PolishRequest = {
+      text,
       language: this.store.language(),
       tone: this.store.tone(),
-    });
+    };
+
+    this.lastSubmittedRequest.set(request);
+    this.store.polish(request);
   }
 
   private detectLanguage(text: string): Language | null {

@@ -28,7 +28,7 @@ export function buildPolishInstructions(
       ? [
           'Пример исправления:',
           'Вход: "I has a book."',
-          'Результат: {"text":"I have a book.","changes":[{"category":"Grammar","original":"has","replacement":"have","explanation":"Исправлено согласование подлежащего и сказуемого."}]}',
+          'Результат: {"text":"I have a book.","changes":[{"category":"Грамматика","original":"has","replacement":"have","explanation":"Исправлено согласование глагола с подлежащим."}]}',
           'Пример без исправлений:',
           'Вход: "Hello, world!"',
           'Результат: {"text":"Hello, world!","changes":[]}',
