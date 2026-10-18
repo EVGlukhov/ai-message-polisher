@@ -19,6 +19,28 @@ const ICONS = {
 
 export type IconName = keyof typeof ICONS;
 
+const svgRequests = new Map<string, Promise<string>>();
+
+function loadSvg(url: string): Promise<string> {
+  const cachedRequest = svgRequests.get(url);
+  if (cachedRequest) return cachedRequest;
+
+  const request = fetch(url)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`Failed to load icon: ${url} (${response.status})`);
+      }
+      return response.text();
+    })
+    .catch((error: unknown) => {
+      svgRequests.delete(url);
+      throw error;
+    });
+
+  svgRequests.set(url, request);
+  return request;
+}
+
 @Component({
   selector: 'app-icon',
   templateUrl: './icon.html',
@@ -30,13 +52,7 @@ export class Icon {
   private readonly sanitizer = inject(DomSanitizer);
   protected readonly svgResource = resource({
     params: () => ICONS[this.name()],
-    loader: async ({ params: url }) => {
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error(`Failed to load icon: ${url} (${response.status})`);
-      }
-      return response.text();
-    },
+    loader: ({ params: url }) => loadSvg(url),
   });
   protected readonly safeSvg = computed(() => {
     if (!this.svgResource.hasValue()) return null;
