@@ -21,18 +21,20 @@
     <app-editor-panel-placeholder></app-editor-panel-placeholder>
   }
   <app-editor-footer class="stack-on-small">
-    @if (!resultModel().text) {
-      <p appTypography="caption" class="grow-0 shrink-0 text-left">
-        Сначала добавьте сообщение
-      </p>
-    } @else if (store.changes().length > 0) {
-      <div class="flex min-w-0 flex-1 items-center justify-start gap-1.5">
-        <app-icon class="shrink-0 text-violet-600" name="success"></app-icon>
-        <p appTypography="caption" class="min-w-0 text-left">{{ toneMessage() }}</p>
-      </div>
-    } @else {
-      <p appTypography="caption">Текст не изменился.</p>
-    }
+    <span>
+      @if (!resultModel().text) {
+        <p appTypography="caption" class="grow-0 shrink-0 text-left">
+          Сначала добавьте сообщение
+        </p>
+      } @else if (store.changes().length > 0) {
+        <div class="flex min-w-0 flex-1 items-center justify-start gap-1.5">
+          <app-icon class="shrink-0 text-violet-600" name="success"></app-icon>
+          <p appTypography="caption" class="min-w-0 text-left">{{ toneMessage() }}</p>
+        </div>
+      } @else if (showUnchangedMessage()) {
+        <p appTypography="caption">Текст не изменился.</p>
+      }
+    </span>
     <div class="flex w-full justify-end pt-2 sm:w-auto sm:pt-0">
       <app-button variant="primary" [disabled]="!canCopy()" (pressed)="copyResult()">
         <app-icon

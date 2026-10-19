@@ -8,6 +8,7 @@ describe('EditorResult', () => {
   let fixture: ComponentFixture<EditorResult>;
   let store: {
     result: WritableSignal<string>;
+    sourceText: WritableSignal<string>;
     tone: WritableSignal<Tone>;
     loading: WritableSignal<boolean>;
     error: WritableSignal<string | null>;
@@ -17,6 +18,7 @@ describe('EditorResult', () => {
   beforeEach(async () => {
     store = {
       result: signal(''),
+      sourceText: signal(''),
       tone: signal(Tone.Preserve),
       loading: signal(false),
       error: signal<string | null>(null),
@@ -49,6 +51,40 @@ describe('EditorResult', () => {
 
     expect(textarea?.value).toBe('Hello, world!');
     expect(textarea?.readOnly).toBe(true);
+  });
+
+  it('shows unchanged text when source and result match and there are no changes', async () => {
+    store.sourceText.set('Hello, world!');
+    store.result.set('Hello, world!');
+    fixture.detectChanges();
+    await fixture.whenStable();
+    fixture.detectChanges();
+
+    expect(fixture.nativeElement.textContent).toContain('Текст не изменился.');
+  });
+
+  it('does not show unchanged text when source differs from result and there are no changes', async () => {
+    store.sourceText.set('Hello!');
+    store.result.set('Hello, world!');
+    fixture.detectChanges();
+    await fixture.whenStable();
+    fixture.detectChanges();
+
+    expect(fixture.nativeElement.textContent).not.toContain('Текст не изменился.');
+  });
+
+  it('hides unchanged text when the source changes after the result is shown', async () => {
+    store.sourceText.set('Hello, world!');
+    store.result.set('Hello, world!');
+    fixture.detectChanges();
+    await fixture.whenStable();
+    fixture.detectChanges();
+    expect(fixture.nativeElement.textContent).toContain('Текст не изменился.');
+
+    store.sourceText.set('Hello again!');
+    fixture.detectChanges();
+
+    expect(fixture.nativeElement.textContent).not.toContain('Текст не изменился.');
   });
 
   it('shows the message for the selected tone', async () => {

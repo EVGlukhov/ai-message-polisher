@@ -15,6 +15,7 @@ import {
 
 type PolishState = PolishSettings & {
   result: string;
+  sourceText: string;
   changes: PolishChange[];
   loading: boolean;
   error: string | null;
@@ -27,6 +28,7 @@ export const PolishStore = signalStore(
   withState<PolishState>({
     tone: Tone.Preserve,
     language: Language.Russian,
+    sourceText: '',
     result: '',
     changes: [],
     loading: false,
@@ -39,6 +41,7 @@ export const PolishStore = signalStore(
       patchState(store, {
         language: Language.Russian,
         tone: Tone.Preserve,
+        sourceText: '',
         result: '',
         changes: [],
         error: null,
@@ -52,6 +55,10 @@ export const PolishStore = signalStore(
 
     updateSettings(settings: PolishSettings): void {
       patchState(store, settings);
+    },
+
+    setSourceText(sourceText: string): void {
+      patchState(store, { sourceText });
     },
 
     resetSettings(): void {
@@ -69,6 +76,7 @@ export const PolishStore = signalStore(
             error: null,
             result: '',
             changes: [],
+            sourceText: request.text,
           });
 
           return api.polish(request).pipe(

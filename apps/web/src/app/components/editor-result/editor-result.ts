@@ -58,6 +58,18 @@ export class EditorResult {
     });
   }
 
+  readonly showUnchangedMessage = computed(() => {
+    const result = this.resultModel().text;
+
+    console.log('result', result);
+    console.log('this.store.sourceText()', this.store.sourceText());
+    console.log('this.store.changes().length', this.store.changes().length);
+
+    return (
+      result.length > 0 && this.store.changes().length === 0 && this.store.sourceText() === result
+    );
+  });
+
   protected canCopy = computed(() => {
     return this.resultModel().text.trim().length > 0;
   });

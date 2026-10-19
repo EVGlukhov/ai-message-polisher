@@ -32,6 +32,14 @@ describe('EditorComposer', () => {
     expect(component).toBeTruthy();
   });
 
+  it('keeps the source text in the store synced with the composer', async () => {
+    component.messageModel.set({ text: 'Updated source text' });
+    fixture.detectChanges();
+    await fixture.whenStable();
+
+    expect(component.store.sourceText()).toBe('Updated source text');
+  });
+
   it('keeps the polish button disabled for empty or whitespace-only input', () => {
     const polishButton = fixture.nativeElement.querySelectorAll('app-button button')[1];
     expect(polishButton.disabled).toBe(true);

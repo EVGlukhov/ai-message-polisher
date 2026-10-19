@@ -69,7 +69,10 @@ export class EditorComposer {
     });
 
     effect(() => {
-      const language = this.detectLanguage(this.messageModel().text);
+      const text = this.messageModel().text;
+      this.store.setSourceText(text);
+
+      const language = this.detectLanguage(text);
 
       if (language) {
         this.store.setLanguage(language);
